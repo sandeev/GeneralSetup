@@ -1,6 +1,6 @@
 package com.sandeev.generalsetuplibrary.ui.base
 
-class BasePresenter<V: MvpView> : MvpPresenter<V> {
+open class BasePresenter<V: MvpView> : MvpPresenter<V> {
 
     private var mvpView: V? = null
 

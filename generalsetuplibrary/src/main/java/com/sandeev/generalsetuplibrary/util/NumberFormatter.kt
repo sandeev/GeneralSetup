@@ -9,11 +9,10 @@ object NumberFormatter {
     fun toRupiah(value: Int?, monetaryDecimalSeparator: Boolean): String? {
         val formatSymbol = DecimalFormatSymbols().apply {
             currencySymbol = "Rp"
-            this.monetaryDecimalSeparator = ','
             groupingSeparator = '.'
         }
 
-        val decimalFormat = (DecimalFormat.getCurrencyInstance() as DecimalFormat).apply {
+        val decimalFormat = (DecimalFormat.getCurrencyInstance(Locale.US) as DecimalFormat).apply {
             decimalFormatSymbols = formatSymbol
             if (!monetaryDecimalSeparator) maximumFractionDigits = 0
         }

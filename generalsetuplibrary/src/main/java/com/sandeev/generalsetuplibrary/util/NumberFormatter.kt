@@ -20,13 +20,13 @@ object NumberFormatter {
     fun formatCurrency(
         value: Int?,
         currencySymbol: String,
-        monetaryDecimalSeparator: Char,
-        groupingSeparator: Char
+        monetaryDecimalSeparator: Char?,
+        groupingSeparator: Char?
     ): String? {
         val formatSymbol = DecimalFormatSymbols().apply {
             this.currencySymbol = currencySymbol
-            this.monetaryDecimalSeparator = monetaryDecimalSeparator
-            this.groupingSeparator = groupingSeparator
+            monetaryDecimalSeparator?.let { this.monetaryDecimalSeparator = it }
+            groupingSeparator?.let { this.groupingSeparator = it }
         }
         val decimalFormat = (DecimalFormat.getCurrencyInstance() as DecimalFormat).apply {
             decimalFormatSymbols = formatSymbol

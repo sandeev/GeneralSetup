@@ -2,34 +2,20 @@ package com.sandeev.generalsetuplibrary.util
 
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
+import java.util.*
 
 object NumberFormatter {
 
-    fun toRupiah(value: Int?): String? {
+    fun toRupiah(value: Int?, monetaryDecimalSeparator: Boolean): String? {
         val formatSymbol = DecimalFormatSymbols().apply {
             currencySymbol = "Rp"
-            monetaryDecimalSeparator = ','
+            this.monetaryDecimalSeparator = ','
             groupingSeparator = '.'
         }
-        val decimalFormat = (DecimalFormat.getCurrencyInstance() as DecimalFormat).apply {
-            decimalFormatSymbols = formatSymbol
-        }
-        return decimalFormat.format(value)
-    }
 
-    fun formatCurrency(
-        value: Int?,
-        currencySymbol: String,
-        monetaryDecimalSeparator: Char?,
-        groupingSeparator: Char?
-    ): String? {
-        val formatSymbol = DecimalFormatSymbols().apply {
-            this.currencySymbol = currencySymbol
-            monetaryDecimalSeparator?.let { this.monetaryDecimalSeparator = it }
-            groupingSeparator?.let { this.groupingSeparator = it }
-        }
         val decimalFormat = (DecimalFormat.getCurrencyInstance() as DecimalFormat).apply {
             decimalFormatSymbols = formatSymbol
+            if (!monetaryDecimalSeparator) maximumFractionDigits = 0
         }
         return decimalFormat.format(value)
     }
